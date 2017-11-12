@@ -12,10 +12,9 @@ passport.serializeUser((user, done) => {
 
 // The counterpart of 'serializeUser'.  Given only a user's ID, we must return
 // the user object.  This object is placed on 'req.user'.
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
 });
 
 // Instructs Passport how to authenticate a user using a locally saved email
@@ -26,17 +25,22 @@ passport.deserializeUser((id, done) => {
 // the password might not match the saved one.  In either case, we call the 'done'
 // callback, including a string that messages why the authentication process failed.
 // This string is provided back to the GraphQL client.
-passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-  User.findOne({ email: email.toLowerCase() }, (err, user) => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
+  let user;
+  try {
+    user = await User.findOneAsync({ email: email.toLowerCase() });
+    if (!user) {
+      return done(null, false, 'Invalid Credentials');
+    }
+  } catch (err) {
+    return done(err);
+  }
+  user.comparePassword(password, (err, isMatch) => {
     if (err) { return done(err); }
-    if (!user) { return done(null, false, 'Invalid Credentials'); }
-    user.comparePassword(password, (err, isMatch) => {
-      if (err) { return done(err); }
-      if (isMatch) {
-        return done(null, user);
-      }
-      return done(null, false, 'Invalid credentials.');
-    });
+    if (isMatch) {
+      return done(null, user);
+    }
+    return done(null, false, 'Invalid credentials.');
   });
 }));
 
@@ -47,23 +51,27 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
 // Notice the Promise created in the second 'then' statement.  This is done
 // because Passport only supports callbacks, while GraphQL only supports promises
 // for async code!  Awkward!
-function signup({ email, password, req }) {
+async function signup({ email, password, req }) {
   const user = new User({ email, password });
   if (!email || !password) { throw new Error('You must provide an email and password.'); }
 
-  return User.findOne({ email })
-    .then(existingUser => {
-      if (existingUser) { throw new Error('Email in use'); }
-      return user.save();
+  let existingUser;
+  try {
+    existingUser = await User.findOneAsync({ email });
+    if (existingUser) {
+      throw new Error('Email in use');
+    } else {
+      user.save();
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+  return new Promise((resolve, reject) => {
+    req.logIn(user, (err) => {
+      if (err) { reject(err); }
+      resolve(user);
     })
-    .then(user => {
-      return new Promise((resolve, reject) => {
-        req.logIn(user, (err) => {
-          if (err) { reject(err); }
-          resolve(user);
-        });
-      });
-    });
+  });
 }
 
 // Logs in a user.  This will invoke the 'local-strategy' defined above in this

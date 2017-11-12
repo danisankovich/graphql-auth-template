@@ -5,6 +5,10 @@ export default gql`
     currentUser {
       id
       email
+      submissions {
+        id
+        title
+      }
     }
   }`
 ;

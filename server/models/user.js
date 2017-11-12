@@ -7,7 +7,11 @@ const Schema = mongoose.Schema;
 // plain text - see the authentication helpers below.
 const UserSchema = new Schema({
   email: String,
-  password: String
+  password: String,
+  submissionIds: [{
+    type: Schema.Types.ObjectId,
+    ref: 'submission'
+  }]
 });
 
 // The user's password is never saved in plain text.  Prior to saving the
@@ -38,5 +42,23 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword,
     cb(err, isMatch);
   });
 };
+
+UserSchema.statics.addSubmission = function(id, content, title) {
+  const Submission = mongoose.model('submission');
+
+  return this.findById(id)
+    .then(user => {
+      const submission = new Submission({ title, content, user })
+      user.submissionIds.push(submission)
+      return Promise.all([submission.save(), user.save()])
+        .then(([submission, user]) => user);
+    });
+}
+
+UserSchema.statics.findSubmissions = async function(id) {
+  const user = await this.findById(id).populate('submissionIds');
+
+  return user.submissionIds;
+}
 
 mongoose.model('user', UserSchema);

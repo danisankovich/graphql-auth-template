@@ -14,8 +14,8 @@ export default (WrappedComponent) => {
         hashHistory.push('/login');
       }
     }
-
     render() {
+      console.log(this.props.data)
       return <WrappedComponent {...this.props} />
     }
   }

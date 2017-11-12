@@ -10,10 +10,16 @@ class Dashboard extends Component {
 
   render() {
     const { data } = this.props;
+
     return (
       <div className="row">
         <div className="col s12">
           {data.currentUser && <h3>Welcome {data.currentUser.email}</h3>}
+        </div>
+        <div className="col s12">
+          {data.currentUser && data.currentUser.submissions.map((submission) =>
+              <h4 key={submission.id}>{submission.title}</h4>
+          )}
         </div>
       </div>
 
