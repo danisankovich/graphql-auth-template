@@ -10,10 +10,30 @@ const SubmissionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
-  responses: {
+  responseIds: [{
     type: Schema.Types.ObjectId,
     ref: 'response'
-  }
+  }]
 });
+
+SubmissionSchema.statics.addResponse = function(userId, submissionId, content) {
+  const Response = mongoose.model('response');
+
+  return this.findById(submissionId)
+    .then(submission => {
+      const response = new Response({ userId, submission: submissionId, content })
+
+      submission.responseIds.push(response)
+
+      return Promise.all([response.save(), submission.save()])
+        .then(([response, submission]) => submission);
+    });
+}
+
+SubmissionSchema.statics.findResponses = async function(id) {
+  const submission = await this.findById(id).populate('responseIds');
+
+  return submission.responseIds;
+}
 
 mongoose.model('submission', SubmissionSchema);

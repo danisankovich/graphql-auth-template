@@ -7,6 +7,7 @@ const {
   GraphQLID,
 } = graphql;
 const UserType = require('./types/user_type');
+const SubmissionType = require('./types/submission_type');
 const AuthService = require('../services/auth');
 const User = mongoose.model('user');
 const Submission = mongoose.model('submission');
@@ -53,16 +54,18 @@ const mutation = new GraphQLObjectType({
         return User.addSubmission(userId, content, title);
       }
     },
-    // getSubmission: {
-    //   type: UserType,
-    //   args: {
-    //     userId: { type: GraphQLID },
-    //     submissionIds: { type: GraphQLList }
-    //   },
-    //   resolve(parentValue, { userId }) {
-    //     return User.getSubmissions(userId)
-    //   }
-    // }
+    addResponse: {
+      type: SubmissionType,
+      args: {
+        content: { type: GraphQLString },
+        userId: { type: GraphQLID },
+        submissionId: { type: GraphQLID }
+      },
+      resolve(parentValue, { userId, submissionId, content }, req) {
+        console.log('hi there')
+        return Submission.addResponse(userId, submissionId, content);
+      }
+    }
   }
 })
 
