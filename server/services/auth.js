@@ -28,7 +28,12 @@ passport.deserializeUser(async (id, done) => {
 passport.use(new LocalStrategy({ usernameField: 'username' }, async (username, password, done) => {
   let user;
   try {
-    user = await User.findOneAsync({ username: username.toLowerCase() });
+    user = await User.findOneAsync({
+      $or: [
+        {username: username.toLowerCase() },
+        {email: username.toLowerCase() },
+      ]
+    });
     if (!user) {
       return done(null, false, 'Invalid Credentials');
     }

@@ -22,7 +22,7 @@ class AuthForm extends Component {
         <form className="col s6" onSubmit={this.onSubmit.bind(this)}>
           <div className="input-field">
             <input
-              placeholder="username"
+              placeholder={`Username ${this.props.isLogin ? ' or Email' : ''}`}
               value={this.state.username}
               onChange={e => this.setState({username: e.target.value})}
               type="text"
