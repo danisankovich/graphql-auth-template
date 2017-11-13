@@ -15,7 +15,6 @@ export default (WrappedComponent) => {
       }
     }
     render() {
-      console.log(this.props.data)
       return <WrappedComponent {...this.props} />
     }
   }

@@ -1,0 +1,22 @@
+.errors {
+  color: red;
+}
+
+.submissionItem {
+  font-size: 24px !important;
+  color: red !important;
+  cursor: pointer;
+  display: block;
+}
+
+.submissionTitle {
+  font-size: 48px;
+}
+
+.submissionContent {
+  font-size: 36px;
+}
+
+.responseContent {
+  font-size: 24px;
+}

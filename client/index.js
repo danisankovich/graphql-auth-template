@@ -8,6 +8,7 @@ import App from './components/App';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Dashboard from './components/Dashboard';
+import Submission from './components/Submission';
 
 // HOC
 import requireAuth from './components/HOC/requireAuth';
@@ -27,9 +28,10 @@ const Root = () => {
     <ApolloProvider client={client}>
       <Router history={hashHistory}>
         <Route path="/" component={App}>
+          <IndexRoute component={requireAuth(Dashboard)}></IndexRoute>
           <Route path="login" component={LoginForm}></Route>
           <Route path="signup" component={SignupForm}></Route>
-          <Route path="dashboard" component={requireAuth(Dashboard)}></Route>
+          <Route path="/:id" component={requireAuth(Submission)}></Route>
         </Route>
       </Router>
     </ApolloProvider>

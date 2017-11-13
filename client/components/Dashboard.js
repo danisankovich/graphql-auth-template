@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
+import { hashHistory, Link } from 'react-router';
+
+require("../css/styles.css")
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
   }
-
+  
   render() {
     const { data } = this.props;
 
@@ -16,7 +19,11 @@ class Dashboard extends Component {
         </div>
         <div className="col s12">
           {data.currentUser && data.currentUser.submissions.map((submission) =>
-              <h4 key={submission.id}>{submission.title}</h4>
+            <Link
+              to={submission.id}
+              className="submissionItem"
+              key={submission.id}
+            >{submission.title}</Link>
           )}
         </div>
       </div>
