@@ -15,6 +15,7 @@ const UserType = new GraphQLObjectType({
   fields: {
     id: { type: GraphQLID },
     email: { type: GraphQLString },
+    username: { type: GraphQLString },
     submissions: {
       type: new GraphQLList(SubmissionType),
       resolve(parentValue) {

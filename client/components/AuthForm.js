@@ -6,13 +6,14 @@ class AuthForm extends Component {
 
     this.state = {
       email: '',
+      username: '',
       password: '',
     }
   }
   onSubmit(e) {
     e.preventDefault();
-    const { email, password } = this.state;
-    this.props.onSubmit({ email, password });
+    const { username, email, password } = this.state;
+    this.props.onSubmit({ username, email, password });
   }
 
   render() {
@@ -21,15 +22,23 @@ class AuthForm extends Component {
         <form className="col s6" onSubmit={this.onSubmit.bind(this)}>
           <div className="input-field">
             <input
+              placeholder="username"
+              value={this.state.username}
+              onChange={e => this.setState({username: e.target.value})}
+              type="text"
+            />
+          </div>
+          {!this.props.isLogin && <div className="input-field">
+            <input
               placeholder="email"
               value={this.state.email}
               onChange={e => this.setState({email: e.target.value})}
               type="email"
             />
-          </div>
+          </div>}
           <div className="input-field">
               <input
-                placeholder="email"
+                placeholder="password"
                 value={this.state.password}
                 onChange={e => this.setState({password: e.target.value})}
                 type="password"

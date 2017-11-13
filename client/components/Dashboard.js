@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
-import currentUserQuery from '../queries/currentUser';
-
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +12,7 @@ class Dashboard extends Component {
     return (
       <div className="row">
         <div className="col s12">
-          {data.currentUser && <h3>Welcome {data.currentUser.email}</h3>}
+          {data.currentUser && <h3>Welcome {data.currentUser.username} ({data.currentUser.email})</h3>}
         </div>
         <div className="col s12">
           {data.currentUser && data.currentUser.submissions.map((submission) =>

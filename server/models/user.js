@@ -8,6 +8,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   email: String,
   password: String,
+  username: String,
   submissionIds: [{
     type: Schema.Types.ObjectId,
     ref: 'submission'

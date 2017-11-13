@@ -11,9 +11,9 @@ class SignupForm extends Component {
     super(props);
     this.state = { errors: [] };
   }
-  onSubmit({ email, password }) {
+  onSubmit({ username, email, password }) {
     this.props.mutate({
-      variables: { email, password },
+      variables: { username, email, password },
       refetchQueries: [{ query: currentUserQuery }]
     }).catch((res) => {
       const errors = res.graphQLErrors.map(error => error.message);
