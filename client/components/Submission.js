@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import { hashHistory, Link } from 'react-router';
 
 import ResponseForm from './ResponseForm';
+import Response from './Response';
 import currentUserQuery from '../queries/currentUser';
 
 import fetchSubmission from '../queries/submission';
@@ -45,17 +46,8 @@ class Submission extends Component {
           </div>
           <div className="col s10">
             {(submission.responses || []).map((response) => {
-              console.log(response)
               return (
-                <div key={response.id} className="response-container">
-                  <div className="submitted-by-response">Submitted by: <Link>{response.username}</Link></div>
-                  <div className={"response-helpful-count" + (response.helpful >= 0 ? ' positive' : ' negative')}>{response.helpful}</div>
-                  <div className="responseContent">{response.content}</div>
-                  <div className="button-holder">
-                    <div>Helpful? <a>Yes</a>/<a>No</a></div>
-                    <div><a>Report</a></div>
-                  </div>
-                </div>
+                <Response response={response} key={response.id} />
               )
             })}
           </div>
