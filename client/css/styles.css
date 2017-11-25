@@ -19,16 +19,28 @@
   display: block;
 }
 
-.submissionTitle {
-  font-size: 48px;
-}
-
 .submissionContent {
-  font-size: 36px;
+  margin-top: 24px;
+  border: 2px solid #d8d8d8;
+  border-radius: 6px;
+  box-shadow: 2px 2px 10px #d8d8d8;
 }
 
-.responseContent {
-  font-size: 24px;
+.submissionTitle {
+  font-size: 28px;
+  padding: 0 40px;
+  margin-top: 8px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.submittedBy {
+  padding: 0 40px;
+  font-size: 14px;
+}
+
+.submissionContent > p {
+  font-size: 22px;
+  padding: 4px 40px;
 }
 
 .formStatus {
@@ -119,4 +131,94 @@
 
 .link-content {
   color: black !important;
+}
+
+.textarea-container {
+  margin-top: 16px;
+}
+
+.response-textarea {
+  position: relative;
+  right: 10px;
+  border: 2px solid #d8d8d8;
+  border-radius: 4px;
+  box-shadow: 2px 2px 10px #d8d8d8;
+  min-height: 100px;
+  outline: none;
+  padding: 8px;
+}
+
+.response-textarea:focus {
+  border: 2px solid #70bbf5;
+}
+
+.SCB-creed {
+  position: relative;
+  right: 10px;
+  margin-top: 4px;
+  font-size: 14px;
+  padding: 4px;
+  background-color: #70bbf5;
+  border: 1px solid #70bbf5;
+  border-radius: 4px;
+}
+
+.save-response-button {
+  position: relative;
+  right: 10px;
+  font-size: 18px;
+  width: 80px;
+  background-color: #689bed;
+  border: 1px solid #689bed;
+  border-radius: 8px;
+  color: white;
+  margin-top: 6px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.response-container {
+  background-color: #EFEFEF;
+  padding: 12px 20px 2px 20px;
+  margin: 8px 0;
+  border-radius: 6px;
+  box-shadow: 2px 2px 10px #d8d8d8;
+}
+
+.submitted-by-response {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.response-helpful-count {
+  display: inline-block;
+  float: right;
+}
+
+.positive {
+  color: black;
+}
+
+.negative {
+  color: red;
+}
+
+.responseContent {
+  font-size: 20px;
+  margin-top: 8px;
+}
+
+.button-holder {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.button-holder > div {
+  display: inline-block;
+  margin-top: 4px;
+  margin-right: 12px;
+}
+
+.button-holder > div > a:hover {
+  cursor: pointer;
+  color: red;
 }

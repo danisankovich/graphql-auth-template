@@ -4,6 +4,7 @@ export default gql`
   query fetchSubmission($id: ID!) {
     submission(id: $id) {
       id
+      username
       title
       content
       responses {
@@ -11,6 +12,7 @@ export default gql`
         userId
         username
         content
+        helpful
       }
     }
   }

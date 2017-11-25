@@ -5,7 +5,7 @@ const {
   GraphQLList,
   GraphQLID,
   GraphQLInt,
-  GraphQLString
+  GraphQLString,
 } = graphql;
 const Response = mongoose.model('response');
 
@@ -16,6 +16,7 @@ const ResponseType = new GraphQLObjectType({
     userId: { type: GraphQLID },
     content: { type: GraphQLString },
     username: { type: GraphQLString },
+    helpful: { type: GraphQLInt },
     song: {
       type: require('./submission_type'),
       resolve(parentValue) {

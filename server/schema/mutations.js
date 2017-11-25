@@ -49,10 +49,11 @@ const mutation = new GraphQLObjectType({
       args: {
         content: { type: GraphQLString },
         title: { type: GraphQLString },
-        userId: { type: GraphQLID }
+        userId: { type: GraphQLID },
+        username: { type: GraphQLString}
       },
-      resolve(parentValue, { content, userId, title }) {
-        return User.addSubmission(userId, content, title);
+      resolve(parentValue, { content, username, userId, title }) {
+        return User.addSubmission(userId, username, content, title);
       }
     },
     addResponse: {
@@ -60,11 +61,11 @@ const mutation = new GraphQLObjectType({
       args: {
         content: { type: GraphQLString },
         userId: { type: GraphQLID },
+        username: { type: GraphQLString },
         submissionId: { type: GraphQLID }
       },
-      resolve(parentValue, { userId, submissionId, content }, req) {
-        console.log('hi there')
-        return Submission.addResponse(userId, submissionId, content);
+      resolve(parentValue, { userId, username, submissionId, content }, req) {
+        return Submission.addResponse(userId, submissionId, content, username);
       }
     }
   }

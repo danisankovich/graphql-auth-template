@@ -9,24 +9,12 @@ const ResponseSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  username: String,
   submission: {
     type: Schema.Types.ObjectId,
     ref: 'submission'
-  }
+  },
+  helpful: { type: Number, default: 0 }
 });
-
-// ResponseSchema
-//   .pre('findOne', function() {
-//     this.populate('user')
-//   })
-//   .pre('find', function() {
-//     this.populate('user')
-//   })
-// ResponseSchema.statics.findUser = async function(id) {
-//   const User = mongoose.model('user');
-//
-//   const user = await User.findById(id);
-//   return user;
-// }
 
 mongoose.model('response', ResponseSchema);

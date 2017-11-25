@@ -44,12 +44,12 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword,
   });
 };
 
-UserSchema.statics.addSubmission = function(id, content, title) {
+UserSchema.statics.addSubmission = function(id, username, content, title) {
   const Submission = mongoose.model('submission');
 
   return this.findById(id)
     .then(user => {
-      const submission = new Submission({ title, content, user })
+      const submission = new Submission({ title, content, user, username })
       user.submissionIds.push(submission)
       return Promise.all([submission.save(), user.save()])
         .then(([submission, user]) => user);

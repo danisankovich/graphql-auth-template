@@ -19,6 +19,7 @@ class SubmissionForm extends Component {
     this.props.mutate({
       variables: {
         userId: this.props.data.currentUser.id,
+        username: this.props.data.currentUser.username,
         content: this.state.content,
         title: this.state.title,
       },
