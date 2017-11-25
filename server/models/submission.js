@@ -31,9 +31,23 @@ SubmissionSchema.statics.addResponse = function(userId, submissionId, content) {
 }
 
 SubmissionSchema.statics.findResponses = async function(id) {
-  const submission = await this.findById(id).populate('responseIds');
+  const User = mongoose.model('user');
 
-  return submission.responseIds;
+  const submission = await this.findById(id).populate('responseIds');
+  submission.responses = await Promise.all(submission.responseIds.map(async (e) => {
+    const { _id, content, userId } = e;
+    const user = await User.findById(e.userId);
+    const username = user.username;
+    response = {
+      id: _id,
+      content,
+      userId,
+      username
+    }
+    return response;
+  }));
+
+  return submission.responses;
 }
 
 mongoose.model('submission', SubmissionSchema);

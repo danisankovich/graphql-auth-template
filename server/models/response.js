@@ -15,4 +15,18 @@ const ResponseSchema = new Schema({
   }
 });
 
+// ResponseSchema
+//   .pre('findOne', function() {
+//     this.populate('user')
+//   })
+//   .pre('find', function() {
+//     this.populate('user')
+//   })
+// ResponseSchema.statics.findUser = async function(id) {
+//   const User = mongoose.model('user');
+//
+//   const user = await User.findById(id);
+//   return user;
+// }
+
 mongoose.model('response', ResponseSchema);

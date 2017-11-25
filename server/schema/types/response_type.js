@@ -15,6 +15,7 @@ const ResponseType = new GraphQLObjectType({
     id: { type: GraphQLID },
     userId: { type: GraphQLID },
     content: { type: GraphQLString },
+    username: { type: GraphQLString },
     song: {
       type: require('./submission_type'),
       resolve(parentValue) {

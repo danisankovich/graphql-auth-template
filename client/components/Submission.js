@@ -30,6 +30,7 @@ class Submission extends Component {
           </div>
           <div className="col s12">
             {(submission.responses || []).map((response) => {
+              console.log(response)
               return (
                 <div key={response.id}>
                   <p className="responseContent">{response.content}</p>

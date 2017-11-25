@@ -109,8 +109,7 @@
 }
 
 .card {
-  height: 160px !important;
-  padding: 12px !important;
+  height: 180px !important;
   cursor: pointer;
 }
 

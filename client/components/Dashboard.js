@@ -67,14 +67,16 @@ class Dashboard extends Component {
 
             return (
               <div className="col s12 m6 l4 mySub" key={id}>
-                <div className="card">
-                  <Link to={id} className="cardContent">
-                    <div className="card-title">
-                      {uppedTitle}
+                <Link to={id}>
+                  <div className="card">
+                    <div className="card-content">
+                      <div className="card-title">
+                        {uppedTitle}
+                      </div>
+                      <p className="link-content">{content}</p>
                     </div>
-                    <p className="link-content">{content}</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </div>
             )
           })}

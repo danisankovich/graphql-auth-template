@@ -9,6 +9,7 @@ export default gql`
       responses {
         id
         userId
+        username
         content
       }
     }
