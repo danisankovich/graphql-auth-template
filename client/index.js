@@ -36,7 +36,7 @@ const Root = () => {
           </Route>
           <Route path="login" component={LoginForm}></Route>
           <Route path="signup" component={SignupForm}></Route>
-          <Route path="/:id" component={requireAuth(Submission)}></Route>
+          <Route path="/:id" component={Submission}></Route>
         </Route>
       </Router>
     </ApolloProvider>

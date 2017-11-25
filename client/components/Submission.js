@@ -21,19 +21,22 @@ class Submission extends Component {
 
   render() {
     const { data, submissionQuery, currentUserQuery } = this.props;
-    const { loading } = data;
-    let submission, currentUser;
+
+    let submission, currentUser, responses;
 
     if (submissionQuery) {
-      submission = submissionQuery.submission;
+      submission = submissionQuery.submission || { responses: [] };
+
+      responses = (submission.responses).map(a => a).sort((a, b) => b.helpful - a.helpful);
     }
+
     if (currentUserQuery) {
       currentUser = currentUserQuery.currentUser;
     }
 
     return (
       <div className="row">
-        {!loading && submission && <div>
+        {submission && <div>
           <div className="col s12">
             <div className="col s10 submissionContent">
               <div className="submissionTitle">{submission.title}</div>
@@ -41,18 +44,15 @@ class Submission extends Component {
               <p>{submission.content}</p>
             </div>
             <div className="col s10 m10 l6">
-              <ResponseForm currentUser={currentUser} submissionId={submission.id} />
+              {currentUser && <ResponseForm currentUser={currentUser} submissionId={submission.id} />}
+              {!currentUser && <div className="noUserNoForm">You must log in to provide responses.</div>}
             </div>
           </div>
           <div className="col s10">
-            {(submission.responses || []).map((response) => {
-              return (
-                <Response response={response} key={response.id} />
-              )
-            })}
+            {(responses || []).map(response => <Response response={response} key={response.id} /> )}
           </div>
         </div>}
-        {loading && <div></div>}
+        {!submission && <div></div>}
       </div>
 
     );
