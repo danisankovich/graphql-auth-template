@@ -276,3 +276,9 @@
   float: right;
   color: #AAAAAA;
 }
+
+.response-count {
+  display: inline-block;
+  float: right;
+  color: black;
+}
