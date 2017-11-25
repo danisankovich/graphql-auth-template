@@ -7,9 +7,7 @@ export default gql`
       title
       username
       content
-      responses {
-        id
-      }
+      responseIds
     }
   }
 `;

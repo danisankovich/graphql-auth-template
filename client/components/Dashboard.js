@@ -53,7 +53,7 @@ class Dashboard extends Component {
         </div>
         <div className="col s12">
           {data.currentUser && data.currentUser.submissions && data.currentUser.submissions.map((submission) => {
-            let { content, id, title, responses } = submission;
+            let { content, id, title, responseIds } = submission;
             if (content.length > 99) {
               content = `${content.substr(0, 98)}...`
             }
@@ -71,7 +71,7 @@ class Dashboard extends Component {
                   <div className="card">
                     <div className="card-content">
                       <div className="card-title">
-                        {uppedTitle} <span className="response-count">({responses.length})</span>
+                        {uppedTitle} <span className="response-count">({responseIds.length})</span>
                       </div>
                       <p className="link-content">{content}</p>
                     </div>

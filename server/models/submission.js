@@ -22,11 +22,10 @@ SubmissionSchema.statics.addResponse = function(userId, submissionId, content, u
 
   return this.findById(submissionId)
     .then(submission => {
-      console.log(userId, submissionId, content, username)
       const response = new Response({ userId, submission: submissionId, content, username })
 
       submission.responseIds.push(response)
-      console.log(response)
+
       return Promise.all([response.save(), submission.save()])
         .then(([response, submission]) => submission);
     });

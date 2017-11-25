@@ -17,6 +17,7 @@ const SubmissionType = new GraphQLObjectType({
     title: { type: GraphQLString },
     content: { type: GraphQLString },
     username: { type: GraphQLString },
+    responseIds: { type: new GraphQLList(GraphQLString) },
     responses: {
       type: new GraphQLList(ResponseType),
       resolve(parentValue) {

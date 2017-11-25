@@ -32,7 +32,7 @@ class FrontPage extends Component {
     return (<div>
       {data && !data.loading && <div>
         {data.submissions.map((e, i) => {
-          let { title, id, responses } = e;
+          let { title, id, responseIds } = e;
 
           return (
             <div className="col s12 m10 l10" key={id}>
@@ -41,8 +41,8 @@ class FrontPage extends Component {
                 <div className="submission-data col s11 m9 l9">
                   <a>{toUpperCase(title)}</a>
 
-                  <div className="responseCounter hide-on-large-only">({responses.length})</div>
-                  <div className="responseCounter hide-on-med-and-down">Responses: {responses.length}</div>
+                  <div className="responseCounter hide-on-large-only">({responseIds.length})</div>
+                  <div className="responseCounter hide-on-med-and-down">Responses: {responseIds.length}</div>
                 </div>
               </div>
             </div>

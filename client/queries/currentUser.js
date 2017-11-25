@@ -10,9 +10,7 @@ export default gql`
         id
         title
         content
-        responses {
-          id
-        }
+        responseIds
       }
     }
   }`

@@ -40,7 +40,7 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <Link to="/" className="brand-logo left">
+          <Link to="/submissions" className="brand-logo left">
             Home
           </Link>
           <ul className="right">
