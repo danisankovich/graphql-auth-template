@@ -7,6 +7,11 @@
   color: red;
 }
 
+.mySub {
+  display: inline-block;
+  padding: 8px;
+}
+
 .submissionItem {
   font-size: 24px !important;
   color: red !important;
@@ -101,4 +106,18 @@
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-right:10px solid #d8d8d8;
+}
+
+.card {
+  height: 160px !important;
+  padding: 12px !important;
+  cursor: pointer;
+}
+
+.card-title {
+  border-bottom: 1px #d8d8d8 solid;
+}
+
+.link-content {
+  color: black !important;
 }

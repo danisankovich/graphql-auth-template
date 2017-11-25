@@ -47,7 +47,7 @@ class SubmissionForm extends Component {
               value={this.state.title}
             />
 
-              <label for="textarea1">Body: </label>
+          <label htmlFor="textarea1">Body: </label>
               <textarea
                 id="textarea1"
                 className="materialize-textarea"

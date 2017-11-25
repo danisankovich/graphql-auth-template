@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { hashHistory, Link } from 'react-router';
+import currentUserQuery from '../queries/currentUser';
 
 import SubmissionForm from './SubmissionForm';
 
@@ -9,6 +10,7 @@ require("../css/styles.css")
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showForm: false,
     }
@@ -51,34 +53,9 @@ class Dashboard extends Component {
             </h3>}
 
         </div>
-        <div className="col s12">
-          {data.currentUser && data.currentUser.submissions && data.currentUser.submissions.map((submission) => {
-            let { content, id, title } = submission;
-            if (content.length > 99) {
-              content = `${content.substr(0, 98)}...`
-            }
-            if (title.length > 15) {
-              title = `${title.substr(0, 14)}...`
-            }
-            const titleWords = title.split(/[\s\-\/]/g);
-            const uppedTitle = titleWords.map(word =>
-              `${word.substr(0, 1).toUpperCase() + word.substr(1, word.length)}`
-            ).join(' ');
 
-            return (
-              <div className="col s12 m6 l4 mySub" key={id}>
-                <div className="card">
-                  <Link to={id} className="cardContent">
-                    <div className="card-title">
-                      {uppedTitle}
-                    </div>
-                    <p className="link-content">{content}</p>
-                  </Link>
-                </div>
-              </div>
-            )
-          })}
-        </div>
+        {this.props.children}
+
         {showForm && <div>
           <SubmissionForm {...this.props } closeForm={this.closeForm.bind(this)} />
         </div>}
@@ -88,4 +65,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default graphql(currentUserQuery)(Dashboard);

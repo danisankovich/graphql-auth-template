@@ -8,7 +8,9 @@ import App from './components/App';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Dashboard from './components/Dashboard';
+import DashboardDynamic from './components/DashboardDynamic';
 import Submission from './components/Submission';
+import FrontPage from './components/FrontPage';
 
 // HOC
 import requireAuth from './components/HOC/requireAuth';
@@ -29,6 +31,9 @@ const Root = () => {
       <Router history={hashHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={requireAuth(Dashboard)}></IndexRoute>
+          <Route path="/submissions" component={DashboardDynamic}>
+            <IndexRoute component={FrontPage}></IndexRoute>
+          </Route>
           <Route path="login" component={LoginForm}></Route>
           <Route path="signup" component={SignupForm}></Route>
           <Route path="/:id" component={requireAuth(Submission)}></Route>

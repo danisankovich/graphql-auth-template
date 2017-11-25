@@ -9,6 +9,7 @@ export default gql`
       submissions {
         id
         title
+        content
       }
     }
   }`

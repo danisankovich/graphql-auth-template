@@ -59,7 +59,7 @@ UserSchema.statics.addSubmission = function(id, content, title) {
 UserSchema.statics.findSubmissions = async function(id) {
   const user = await this.findById(id).populate('submissionIds');
 
-  return user.submissionIds;
+  return user.submissionIds.reverse();
 }
 
 mongoose.model('user', UserSchema);
