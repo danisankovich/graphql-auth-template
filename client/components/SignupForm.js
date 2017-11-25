@@ -24,7 +24,7 @@ class SignupForm extends Component {
   //called right before rerender
   componentWillUpdate(nextProps) {
     if (!this.props.data.currentUser && nextProps.data.currentUser) {
-      hashHistory.push('/dashboard');
+      hashHistory.push('/');
     }
   }
 

@@ -4,7 +4,8 @@ const {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLList
 } = graphql;
 const UserType = require('./user_type');
 const SubmissionType = require('./submission_type');
@@ -30,6 +31,13 @@ const RootQueryType = new GraphQLObjectType({
       },
       resolve(parentValue, { id }, req) {
         return Submission.findById(id);
+      }
+    },
+    submissions: {
+      type: new GraphQLList(SubmissionType),
+      resolve(parentValue, args, req) {
+        // return Submission.find({}).skip(Submission.count() - 20);
+        return Submission.find();
       }
     },
     response: {

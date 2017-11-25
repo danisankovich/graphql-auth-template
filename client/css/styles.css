@@ -246,3 +246,33 @@
   margin: 8px 0;
   padding-left: 80px;
 }
+
+.submission-holder {
+  margin: 4px 0;
+  font-size: 20px;
+}
+
+.submission-data {
+  margin-top: 2px;
+  display: inline-block;
+  border: 2px solid #efefef;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.submission-data:hover {
+  box-shadow: 2px 2px 10px #d8d8d8;
+  cursor: pointer;
+}
+
+.array-index {
+  display: inline-block;
+  color: #AAAAAA;
+  font-size: 24px;
+}
+
+.responseCounter {
+  display: inline-block;
+  float: right;
+  color: #AAAAAA;
+}
