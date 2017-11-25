@@ -41,7 +41,8 @@ class FrontPage extends Component {
                 <div className="submission-data col s11 m9 l9">
                   <a>{toUpperCase(title)}</a>
 
-                  <div className="responseCounter">Responses: {responses.length}</div>
+                  <div className="responseCounter hide-on-large-only">({responses.length})</div>
+                  <div className="responseCounter hide-on-med-and-down">Responses: {responses.length}</div>
                 </div>
               </div>
             </div>
