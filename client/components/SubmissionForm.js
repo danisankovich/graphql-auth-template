@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import currentUserQuery from '../queries/currentUser';
+import submissionsQuery from '../queries/submissions';
 import mutation from '../mutations/addSubmission';
 
 class SubmissionForm extends Component {
@@ -23,7 +24,7 @@ class SubmissionForm extends Component {
         content: this.state.content,
         title: this.state.title,
       },
-      refetchQueries: [{ query: currentUserQuery }]
+      refetchQueries: [{ query: currentUserQuery }, { query: submissionsQuery }]
     }).then(() => {
       this.setState({title: '', content: ''});
       this.props.closeForm({target: {}}, 'submitted');
@@ -38,23 +39,20 @@ class SubmissionForm extends Component {
         <div className="submissionFormInner">
           <i
             onClick={(e) =>this.props.closeForm(e, 'closeButton')}
-            className="material-icons right closeColor">close<
-          /i>
+            className="material-icons right closeColor">close</i>
           <h3>Get It Off Your Back</h3>
           <form onSubmit={this.onSubmit.bind(this)}>
             <label>Title: </label>
             <input
               onChange={event => this.setState({title: event.target.value})}
-              value={this.state.title}
-            />
+              value={this.state.title} />
 
-          <label htmlFor="textarea1">Body: </label>
-              <textarea
-                id="textarea1"
-                className="materialize-textarea"
-                onChange={event => this.setState({content: event.target.value})}
-                value={this.state.content}
-              ></textarea>
+            <label htmlFor="textarea1">Body: </label>
+            <textarea
+              id="textarea1"
+              className="materialize-textarea"
+              onChange={event => this.setState({content: event.target.value})}
+              value={this.state.content}></textarea>
             <button
               className="btn waves-effect waves-light"
               type="submit"
